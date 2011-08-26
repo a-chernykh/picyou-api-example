@@ -1,0 +1,8 @@
+<% if session[:access_token].blank? %>
+  <%= link_to 'Connect with PicYou', request_token_url %>
+<% else %>
+  <%= form_tag upload_url, :multipart => true do %>
+    <%= file_field_tag :file %>
+    <%= submit_tag 'Upload photo' %>
+  <% end %>
+<% end %>

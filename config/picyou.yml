@@ -1,0 +1,15 @@
+defaults: &defaults
+  consumer_key: RjCELmddGbkaCHzv5N89l6wJPm7etUld6O7p8z2Q
+  consumer_secret: C6BMxmL26tEhmazDPheHaTujShbuMTnBKHwWP0tr
+
+development:
+  <<: *defaults
+
+staging:
+  <<: *defaults
+
+production:
+  <<: *defaults
+
+test:
+  <<: *defaults

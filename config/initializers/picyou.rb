@@ -1,0 +1,1 @@
+PICYOU_CONFIG = YAML.load_file(File.join(Rails.root, 'config', 'picyou.yml'))[Rails.env]
