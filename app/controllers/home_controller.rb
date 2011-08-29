@@ -26,7 +26,7 @@ class HomeController < ApplicationController
     params.each do |key,value|
       body << "--#{boundary}#{CRLF}"
       if value.respond_to?(:read)
-        body << "Content-Disposition: form-data; name=\"#{key.to_s}\"; filename=\"#{File.basename(value.path)}\"#{CRLF}"
+        body << "Content-Disposition: form-data; name=\"#{key.to_s}\"; filename=\"photo.jpg\"#{CRLF}"
         body << "Content-Type: image/jpeg#{CRLF*2}"
         body << value.read
       else
