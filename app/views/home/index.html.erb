@@ -2,7 +2,17 @@
   <%= link_to 'Connect with PicYou', request_token_url %>
 <% else %>
   <%= form_tag upload_url, :multipart => true do %>
-    <%= file_field_tag :file %>
+    <div class="field">
+      <%= file_field_tag :file %>
+    </div>
+    <div class="field">
+      <label for="url">or paste URL</label>
+      <%= text_field_tag :url, '', :size => '100' %>
+    </div>
+    <div class="field">
+      <%= label_tag 'filter', 'Apply Filter' %>
+      <%= select_tag 'filter', options_for_select(['', 'albion', 'hipster', 'killowatt', 'infatuation', 'zeitgeist', 'cuttlefish', 'retrofocus', 'gammanation']) %>
+    </div>
     <%= submit_tag 'Upload photo' %>
   <% end %>
 <% end %>

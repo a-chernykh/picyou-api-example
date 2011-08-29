@@ -1,19 +1,24 @@
 class HomeController < ApplicationController
   CRLF = "\r\n"
+  URL = 'http://developer.picyou.dev:3000/api/v1/images.json'
 
   def index
   end
 
   def upload
-    file = params[:file]
-    url = URI.parse('http://picyou.dev:3000/api/v1/images.json')
-    Net::HTTP.new(url.host, url.port).start do |http|
-      req = Net::HTTP::Post.new(url.request_uri)
-      add_multipart_data(req, 'image[file]' => file)
-      add_oauth(req)
-      res = http.request(req)
-      render :text => res.body
+    if params[:url].present?
+      res = session[:access_token].post(URL, {'image[remote_file_url]' => params[:url], 'image[filter]' => params[:filter]})
+    else
+      file = params[:file]
+      url = URI.parse(URL)
+      Net::HTTP.new(url.host, url.port).start do |http|
+        req = Net::HTTP::Post.new(url.request_uri)
+        add_multipart_data(req, {'image[file]' => file, 'image[filter]' => params[:filter]})
+        add_oauth(req)
+        res = http.request(req)
+      end
     end
+    render :text => res.body
   end
 
   protected
